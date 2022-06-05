@@ -1,25 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import Products from "./components/Products";
+import Header from "./components/Header"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+const App = () => {
+    document.body.style = 'background-image: linear-gradient( 174.2deg,  rgba(255,244,228,1) 7.1%, rgba(240,246,238,1) 67.4% );';
+    
+    return (
+        <div>
+            <Header />
+            <Products />
+        </div>
+    )
 }
 
-export default App;
+export default App
