@@ -17,7 +17,11 @@ const Products = (props) => {
     const [responseForPagination, setResponseForPagination] = useState();
     
     const getData = async() => {
-        const res = await codibly.get("");
+    
+        const res = await codibly.get("", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'}
+          });
         setResponse(res.data);
         setTotalItems(res.data.total)
         prepareForPagination(res.data,pageSize,page)
