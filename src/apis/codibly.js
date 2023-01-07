@@ -7,5 +7,5 @@ export default axios.create({
          'Content-Type': 'application/json'
         },
 
-    baseURL: "http://reqres.in/api/products"
+    baseURL: "https://reqres.in/api/products"
 })

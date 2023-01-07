@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { store } from "../index";
+import { z } from "zod"
 import codibly from "../apis/codibly";
 import { Pagination, List, Input } from "semantic-ui-react";
 import renderList from "../helper-functions/renderList";
 import { setFilterValue } from "../actions";
-import { store } from "../index";
+import responseSchema from "../schemas/responseSchema"
 
 const Products = (props: any) => {
   const [response, setResponse] = useState();
@@ -15,17 +17,26 @@ const Products = (props: any) => {
   const [totalPages, setTotalPages] = useState<typeof freeType>()
   let freeType: number;
   const getData = async () => {
+    
     const res = await codibly.get("", {
-      //method: 'GET',
+      method: 'POST',
       headers: {
-        //'Accept': 'application/json, text/plain, */*',
+        'Accept': 'application/json, text/plain, */*',
         "Content-Type": "application/json",
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       },
     });
-    setResponse(res.data);
-    setTotalItems(res.data.total);
-    prepareForPagination(res.data, pageSize, page);
-    setTotalPages(res.data.total_pages)
+    
+    if (responseSchema.safeParse(res.data).success) {
+      console.log("validation passed");
+
+      setResponse(res.data);
+      setTotalItems(res.data.total);
+      prepareForPagination(res.data, pageSize, page);
+      setTotalPages(res.data.total_pages)
+    } else console.log("Error validating API response ")
+
 
   };
 
