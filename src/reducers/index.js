@@ -1,8 +1,6 @@
-import { combineReducers} from "redux";
-import filterReducer from "./filterReducer"
-
+import { combineReducers } from "redux";
+import filterReducer from "./filterReducer";
 
 export default combineReducers({
-    filterReducer: filterReducer,
-    
-})
+  filterReducer: filterReducer,
+});
