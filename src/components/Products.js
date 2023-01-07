@@ -19,8 +19,11 @@ const Products = (props) => {
     const getData = async() => {
     
         const res = await codibly.get("", {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json'}
+            //method: 'GET',
+            headers: {
+                //'Accept': 'application/json, text/plain, */*',
+                 'Content-Type': 'application/json'
+                }
           });
         setResponse(res.data);
         setTotalItems(res.data.total)

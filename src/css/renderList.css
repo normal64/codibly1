@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+.ui .list .item{
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    
+    align-items: center;
+    width: 30em;
+    margin-top: 1em;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    border-radius: 20px;
+}
+.ui .list{
+    //background-color: purple ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+}
