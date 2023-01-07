@@ -2,17 +2,18 @@ import React, { useEffect, useState } from "react";
 import codibly from "../apis/codibly";
 import { Pagination, List, Input } from "semantic-ui-react";
 import renderList from "../helper-functions/renderList";
-import { setFilterValue } from "../actions/";
+import { setFilterValue } from "../actions";
 import { store } from "../index";
 
-const Products = (props) => {
+const Products = (props: any) => {
   const [response, setResponse] = useState();
   const [filter, setFilter] = useState();
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
   const [totalItems, setTotalItems] = useState();
   const [responseForPagination, setResponseForPagination] = useState();
-
+  const [totalPages, setTotalPages] = useState<typeof freeType>()
+  let freeType: number;
   const getData = async () => {
     const res = await codibly.get("", {
       //method: 'GET',
@@ -24,12 +25,14 @@ const Products = (props) => {
     setResponse(res.data);
     setTotalItems(res.data.total);
     prepareForPagination(res.data, pageSize, page);
+    setTotalPages(res.data.total_pages)
+
   };
 
-  const prepareForPagination = (response, pageSize, page) => {
+  const prepareForPagination = (response: any, pageSize: any, page: any) => {
     let start = Number((page - 1) * pageSize + 1);
     let end = start - 1 + pageSize;
-    let niceResponse = response.data.filter((elem) => {
+    let niceResponse = response.data.filter((elem: any) => {
       if (elem.id >= start && elem.id <= end) {
         return elem;
       }
@@ -41,7 +44,7 @@ const Products = (props) => {
     getData();
   }, []);
 
-  const onFormChange = (e) => {
+  const onFormChange = (e: any) => {
     if (isNaN(e.target.value) == true) {
       return;
     }
@@ -72,7 +75,8 @@ const Products = (props) => {
           </List>
           <Pagination
             defaultActivePage={page}
-            totalPages={response.total_pages}
+            // totalPages={response.total_pages}
+            totalPages={totalPages ? totalPages : 1}
             onPageChange={(event, data) => {
               // setPage(data.activePage)
               prepareForPagination(response, pageSize, data.activePage);

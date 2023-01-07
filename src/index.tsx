@@ -5,7 +5,13 @@ import App from "./App";
 import reducers from "./reducers";
 import reduxThunk from "redux-thunk";
 
-const rootElement = document.querySelector("#root");
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+
+const rootElement = document.querySelector("#root")!;
 const root = createRoot(rootElement);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const store = createStore(
